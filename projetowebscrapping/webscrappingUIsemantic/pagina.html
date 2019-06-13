@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <header>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+             
+    </header>
+    <style> body{
+        background: #757575;
+        height: 100%;
+    }
+     
+    </style>
+    <body>
+            
+                    <div class=" ui black segment ui center aligned segment">
+                            <h1>BALNEABILIDADE</h1>
+                            <h2>Dados da página balneabilidade da praia  pontal Norte de balneário camboriú</h2> 
+                    </div>
+
+                <div class="ui one column grid">
+                        <div class="column" style="background-color:#757575; ">
+                          <div class="ui segment">
+                                <canvas class="myChart"></canvas>
+                        </div>
+                        </div>
+                
+                
+                 
+
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+            
+        
+
+
+                  <script>
+                
+                        $.getJSON("index.php", function(mydados){
+                          var datas=[];
+                          var ecoli=[];
+                          var ar=[];
+                          //var condi=[];
+                           for (let i = 1; i < 21; i++) {
+                              datas[i]=[mydados[i][0]];
+                             ecoli[i]=[mydados[i][7]];
+                             ar[i]=[mydados[i][6]].toString().split(' ')[0];
+                             //condi[i]=[mydados[i][8]];
+                             
+                               
+                           }
+                         // console.log(ar);
+                           
+                        
+                  
+                         var ctx = document.getElementsByClassName("myChart");
+  
+  var mixedChart = new Chart(ctx, {
+      type: 'bar',
+              
+      data: {
+          labels: datas,
+          datasets: [{
+              label: "(Ecoli)",
+              borderWidth: 2,
+             
+              data: ecoli,  
+              },
+              
+              {
+  label: 'Ar:°C',
+  data:ar,
+  type: 'line',
+  backgroundColor:[
+         'rgb(35,35,142)',
+         
+                     ],
+  borderColor:[
+             'rgb(35,35,142)',
+          ],
+          borderWidth: 10
+              
+          }],
+          labels: datas,
+         
+  
+      },
+      
+      options: {
+        
+          scales: { 
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+    });
+                        });
+              
+                    </script>
+                    
+                   
+
+                <div class="ui one column grid">
+           
+                     <footer class="ui tertiary inverted segment" >
+                        © 2019 Copyright @lucasdejesus
+                    
+                         <div class="ui right aligned segment">
+                           
+                            <a class=" grey-text" href="https://balneabilidade.ima.sc.gov.br/#"> <ins> Site Balneabilidade </ins></a> 
+                          </div>
+
+                     </footer>
+
+                        
+                 </div>   
+            
+    </body>          
+
+    
+
+</html>

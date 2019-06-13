@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+             <style>
+               html, body{
+                 height: 100%;
+                 background-color: cadetblue;
+
+               }
+              .container{
+                display: flex;
+                flex-direction: column;
+                min-height: 100%;
+                
+              }   
+              .row{
+                flex: 1;
+              }
+             </style>
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="row">
+                
+                    <div id="graficos" class="col s12 teal lighten-2"> 
+                            <h1 class="center-align">BALNEABILIDADE</h1>
+                            <h2 class="center-align">Dados da página balneabilidade da praia  pontal Norte de balneário camboriú</h2> 
+                        </div>
+                        <div class="col s12" style="background-color:rgb(232, 234, 243)" ><canvas class="myChart"></canvas></div>
+                        
+                    </div>
+                
+                 
+
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+            
+                  <script>
+                
+                      $.getJSON("index.php", function(mydados){
+                        var datas=[];
+                        var ecoli=[];
+                        var ar=[];
+                        //var condi=[];
+                         for (let i = 1; i < 21; i++) {
+                            datas[i]=[mydados[i][0]];
+                           ecoli[i]=[mydados[i][7]];
+                           ar[i]=[mydados[i][6]].toString().split(' ')[0];
+                           //condi[i]=[mydados[i][8]];
+                           
+                             
+                         }
+                       // console.log(ar);
+                         
+                      
+                
+                       var ctx = document.getElementsByClassName("myChart");
+
+var mixedChart = new Chart(ctx, {
+    type: 'bar',
+            
+    data: {
+        labels: datas,
+        datasets: [{
+            label: "(Ecoli)",
+            borderWidth: 2,
+           
+            data: ecoli,  
+            },
+            
+            {
+label: 'Ar:°C',
+data:ar,
+type: 'line',
+backgroundColor:[
+       'rgb(35,35,142)',
+       
+                   ],
+borderColor:[
+           'rgb(35,35,142)',
+        ],
+        borderWidth: 10
+            
+        }],
+        labels: datas,
+       
+
+    },
+    
+    options: {
+      
+        scales: { 
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+  });
+                      });
+            
+                  </script>
+                   
+              
+                
+                        
+                       
+
+
+
+  
+                  <footer class="page-footer  grey lighten-4">
+                        
+                      
+                      <div class="footer-copyright teal lighten-2 black-text">
+                          © 2019 Copyright @lucasdejesus
+                       <a class="black-text text-lighten-4 " href="https://balneabilidade.ima.sc.gov.br/#"> <ins> Site Balneabilidade </ins></a> 
+                      </div>
+                    
+                  </footer>
+               
+                
+              </div>
+    
+    </body>
+
+</html>

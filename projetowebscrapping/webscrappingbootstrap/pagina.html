@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <header>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+            
+    </header>
+<style>
+    body{
+    
+    background-color: darkgray;
+}
+    
+</style>
+
+
+
+    <body>
+            
+
+    
+           
+      
+            <div class="jumbotron text-center bg-secondary">
+                    <h1>BALNEABILIDADE</h1>
+                    <h3>Dados da página balneabilidade da praia  pontal Norte de balneário camboriú</h3> 
+                  </div>
+                  
+                  <div class="container">
+                      <div class="row bg-light" >
+                            <canvas class="myChart"></canvas>
+
+                      </div>
+                  
+                  </div>
+    
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+            
+        
+
+
+                  <script>
+                
+                      $.getJSON("index.php", function(mydados){
+                        var datas=[];
+                        var ecoli=[];
+                        var ar=[];
+                        var condi=[];
+                         for (let i = 1; i < 21; i++) {
+                            datas[i]=[mydados[i][0]];
+                            ecoli[i]=[mydados[i][7]];
+                            ar[i]=[mydados[i][6]].toString().split(' ')[0]; 
+                           // condi[i]=[mydados[i][8]];
+                           //console.log(ecoli);
+                             
+                         }
+                      
+                      
+                    
+    
+                      
+
+                  var ctx = document.getElementsByClassName("myChart");
+
+                  var mixedChart = new Chart(ctx, {
+                      type: 'bar',
+                              
+                      data: {
+                          labels: datas,
+                          datasets: [{
+                              label: "(Ecoli)",
+                              borderWidth: 2,
+                             
+                              data: ecoli,  
+                              },
+                              
+                              {
+            label: 'Ar:°C',
+            data:ar,
+            type: 'line',
+            backgroundColor:[
+                         'rgb(35,35,142)',
+                         
+                                     ],
+                borderColor:[
+                             'rgb(35,35,142)',
+                          ],
+                          borderWidth: 10
+                              
+                          }],
+                          labels: datas,
+                         
+
+                      },
+                      
+                      options: {
+                        
+                          scales: { 
+                              yAxes: [{
+                                  ticks: {
+                                      beginAtZero: true
+                                  }
+                              }]
+                          }
+                      }
+                    });
+                });
+            
+                  </script>
+                      
+
+    </body>
+
+</html>
